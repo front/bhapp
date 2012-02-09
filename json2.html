@@ -12,11 +12,13 @@
 			var GALLERY_URI = 'http://barnehage.vps4.front.no/sites/default/files/gallery/';
 			var SERVICE_URI = 'http://barnehage.vps4.front.no/api/rest/node/54/';
 			
-			$.getJSON(SERVICE_URI, function(data){
+			/*$.getJSON(SERVICE_URI, function(data){
 				var img_uri = GALLERY_URI + data.field_img.und[0].filename;
 				alert( "image uri = "+ img_uri);
 				$('body').append('<img src="' + img_uri + '"></img>');
-			}); //end getJSON()
+			}); //end getJSON() */
+			var myPhotoSwipe = $("#Gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+			
 		});	//end ready
 	</script>
   </head>
@@ -25,6 +27,17 @@
   <body>
 		<div id="results">
     	<h2>Json eksempel (siste bilde i galleri)</h2>
-		</div>	
+		</div>
+		
+		<ul id="Gallery">
+			<li><a href="images/full/01.jpg"><img src="images/thumb/01.jpg" alt="Image 01" /></a></li>
+			<li><a href="images/full/02.jpg"><img src="images/thumb/02.jpg" alt="Image 02" /></a></li>
+			<li><a href="images/full/03.jpg"><img src="images/thumb/03.jpg" alt="Image 03" /></a></li>
+			<li><a href="images/full/04.jpg"><img src="images/thumb/04.jpg" alt="Image 04" /></a></li>
+			<li><a href="images/full/05.jpg"><img src="images/thumb/05.jpg" alt="Image 05" /></a></li>
+			<li><a href="images/full/06.jpg"><img src="images/thumb/06.jpg" alt="Image 06" /></a></li>
+		</ul>
+		
+			
 	<body>
 </html>
