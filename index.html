@@ -34,7 +34,7 @@
 					var img_title = this.node.title;
 				
 					
-					var new_img = "<li><a href='" + img_full + "'><img src='" + img_thumb + "' alt='" + img_title + "' /></a></li>";
+					var new_img = "<li><a href='" + img_full + "' rel='external'><img src='" + img_thumb + "' alt='" + img_title + "' /></a></li>";
 					alert(new_img); 
 					$("#Gallery1 .gallery").append( new_img);
 					
@@ -109,6 +109,8 @@
 
 	<body>
 
+
+<!-- PAGE HOME -->
 	<div data-role="page" id="Home">
 
 		<div data-role="header">
@@ -118,6 +120,8 @@
 		<div data-role="content" >	
 			<ul data-role="listview" data-inset="true">
 				<li><a href="#Gallery1">Demo Galleri</a></li> 
+				<li><a href="#Search">Search</a></li> 
+				
 			</ul> 
 		</div>
 		<div data-role="footer">
@@ -125,6 +129,8 @@
 		</div>
 	</div>
 
+
+<!-- PAGE GALLERI -->
 	<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
 
 		<div data-role="header">
@@ -146,8 +152,12 @@
 		</div>
 
 	</div>
-
-
+	
+<!-- PAGE SEARCH -->
+	<div data-role="page" data-add-back-btn="true" id="Search">
+	
+	
+	</div>
 	</body>
 
 </html>
