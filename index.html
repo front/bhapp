@@ -1,0 +1,153 @@
+<html>
+  <head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>	
+	<script type="text/javascript" src="photoswipe/lib/klass.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.js"></script>
+	<script type="text/javascript" src="photoswipe/code.photoswipe-3.0.4.min.js"></script>
+	
+	
+	<link href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css" rel="stylesheet" />
+	<link href="http://www.photoswipe.com/latest/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
+	<link href="http://www.photoswipe.com/latest/photoswipe.css" type="text/css" rel="stylesheet" />
+	
+	
+	
+	
+	<!-- OBS Fungerer ikke i Chrome av en eller annen grunn (undefined error) -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// constants	
+			var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
+			//var SERVICE_URI = "http://barnehage.vps4.front.no/api/rest/node/54/";
+			var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
+			
+			$.getJSON(SERVICE_URI, function(data){
+				
+				//alert( "jsondata: " + data);
+				//alert(data.nodes[0].node.field_img)
+				//var img_uri = data.nodes[0].node.field_img;
+				//$('#Gallery').append('<li><a href="' + img_uri + '"><img src="' + img_uri + '" alt="Image 06" /></a></li>');
+				
+				$.each(data.nodes, function(){
+					var img_full =  this.node.full;
+					var img_thumb = this.node.thumb;
+					var img_title = this.node.title;
+				
+					
+					var new_img = "<li><a href='" + img_full + "'><img src='" + img_thumb + "' alt='" + img_title + "' /></a></li>";
+					alert(new_img); 
+					$("#Gallery1 .gallery").append( new_img);
+					
+					
+				}); // end each
+			
+			}); //end getJSON() 
+			
+			
+			//var myPhotoSwipe = $("#Gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+			
+		});	//end ready
+	</script>
+	
+	
+	
+	
+	
+	
+	<script type="text/javascript">
+
+			/*
+			 * IMPORTANT!!!
+			 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
+			 * If you don't this will mess with how jQuery Mobile works
+			 */
+
+			(function(window, $, PhotoSwipe){
+
+				$(document).ready(function(){
+
+					$('div.gallery-page')
+						.live('pageshow', function(e){
+
+							var 
+								currentPage = $(e.target),
+								options = {},
+								photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
+
+							return true;
+
+						})
+
+						.live('pagehide', function(e){
+
+							var 
+								currentPage = $(e.target),
+								photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+
+							if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+								PhotoSwipe.detatch(photoSwipeInstance);
+							}
+
+							return true;
+
+						});
+
+				});
+
+			}(window, window.jQuery, window.Code.PhotoSwipe));
+
+		</script>
+	
+	
+	
+	
+	
+	
+	
+	
+  </head>
+
+	<body>
+
+	<div data-role="page" id="Home">
+
+		<div data-role="header">
+			<h1>PhotoSwipe demo</h1>
+		</div>
+		
+		<div data-role="content" >	
+			<ul data-role="listview" data-inset="true">
+				<li><a href="#Gallery1">Demo Galleri</a></li> 
+			</ul> 
+		</div>
+		<div data-role="footer">
+			<h4>Demo Galleri</h4>
+		</div>
+	</div>
+
+	<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
+
+		<div data-role="header">
+			<h1>Demo Galleri</h1>
+		</div>
+
+		<div data-role="content">	
+
+			<ul class="gallery">
+
+				<!-- Images added via jquery -->
+
+			</ul>
+
+		</div>
+
+		<div data-role="footer">
+			<h4> Demo Galleri</h4>
+		</div>
+
+	</div>
+
+
+	</body>
+
+</html>
