@@ -1,0 +1,44 @@
+<html>
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>	
+	<script type="text/javascript" src="photoswipe/lib/klass.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.js"></script>
+	<script type="text/javascript" src="photoswipe/code.photoswipe-3.0.4.min.js"></script>
+
+
+	<link href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css" rel="stylesheet" />
+	<link href="http://www.photoswipe.com/latest/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
+	<link href="http://www.photoswipe.com/latest/photoswipe.css" type="text/css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+	<div data-role="page" data-add-back-btn="true" id="Search">
+		<div data-role="header">
+			<h1>Search</h1>
+			<form action="" method="get" class="ui-body ui-body-a ui-corner-all">
+				<div data-role="fieldcontain">
+					<label for="query">Search: </label>
+					<input type="search" name="search" id="search" value="" />
+					<button type="submit" name="submit">Submit</input>
+					</div>
+				</form>
+				<div id="Result">
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		$("form").submit(function(){
+			var q = $("#search").val();
+			//alert( "query:" + q);
+			return false;
+		});
+		</script>
+
+	</div>
+
+</body>
+
+</html>
