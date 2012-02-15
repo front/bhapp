@@ -1,182 +1,178 @@
 <html>
-  <head>
+<head>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>	
 	<script type="text/javascript" src="photoswipe/lib/klass.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.js"></script>
 	<script type="text/javascript" src="photoswipe/code.photoswipe-3.0.4.min.js"></script>
+	<script src="js/h5utils.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDyNSx7B8ayBFR5iPHbwmcEn7JSPWttPno&sensor=false"></script>
 	
 	
 	<link href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css" rel="stylesheet" />
 	<link href="http://www.photoswipe.com/latest/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
 	<link href="http://www.photoswipe.com/latest/photoswipe.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+function SetCurrentLocation(){ navigator.geolocation.getCurrentPosition(SetCurrentLocation_OnSuccess, SetCurrentLocation_OnError,{maximumAge:0, timeout:15000}); }
+
+function SetCurrentLocation_OnSuccess(position) {
+	sLatitude = position.coords.latitude;
+	sLongitude = position.coords.longitude;
+	alert("Din Posisjon er " + sLatitude + " + "+ sLongitude );
 	
+	var mapcanvas = document.createElement('div');
+	mapcanvas.id = 'mapcanvas';
+	mapcanvas.style.height = '400px'; // Cannot set to % ?!
+	mapcanvas.style.width = '100%';
+
+	document.querySelector('div#loc div.ui-content').appendChild(mapcanvas);
+
+	//alert( "useragent:" + useragent.indexOf('iPhone') );
+  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var myOptions = {
+	    zoom: 16,
+	    center: latlng,
+	    mapTypeControl: false,
+	    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  };
+	  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+
+	  var marker = new google.maps.Marker({
+	      position: latlng, 
+	      map: map, 
+	      title:"Du er her! (Med " + position.coords.accuracy + " meters nøyaktighet)"
+	  });
+}
+function SetCurrentLocation_OnError(error) {
+		alert("Location not found");
+}
+
+/* 
+ * GALLERY 
+ */
+
+$('#Gallery1').live( 'pageinit', function(event){
 	
-	
-	
-	<!-- OBS Fungerer ikke i Chrome av en eller annen grunn (undefined error) -->
-	<script type="text/javascript">
-		$(document).ready(function(){
-			// constants	
-			var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
-			//var SERVICE_URI = "http://barnehage.vps4.front.no/api/rest/node/54/";
-			var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
+	var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
+	var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
+
+	$.getJSON(SERVICE_URI, function(data){
+
+		//alert( "jsondata: " + data);
+
+	// For each node, add some html to the DOM
+		$.each(data.nodes, function(){
+			var img_full =  this.node.full;
+			var img_thumb = this.node.thumb;
+			var img_title = this.node.title;
 			
-			$.getJSON(SERVICE_URI, function(data){
-				
-				//alert( "jsondata: " + data);
-				//alert(data.nodes[0].node.field_img)
-				//var img_uri = data.nodes[0].node.field_img;
-				//$('#Gallery').append('<li><a href="' + img_uri + '"><img src="' + img_uri + '" alt="Image 06" /></a></li>');
-				
-				$.each(data.nodes, function(){
-					var img_full =  this.node.full;
-					var img_thumb = this.node.thumb;
-					var img_title = this.node.title;
-				
-					
-					var new_img = "<li><a href='" + img_full + "' rel='external'><img src='" + img_thumb + "' alt='" + img_title + "' /></a></li>";
-					//alert(new_img); 
-					$("#Gallery1 .gallery").append( new_img);
-					
-					
-				}); // end each
+			var new_img = "<li><a href='" + img_full + "' rel='external'><img src='" + img_thumb + "' alt='" + img_title + "' /></a></li>";
+			$("#Gallery1 .gallery").append( new_img);					
+		}); // end each
+
+	}); //end getJSON()
+});
+
+
+
+/*
+* IMPORTANT!!!
+* REMEMBER TO ADD  rel="external"  to your anchor tags. 
+* If you don't this will mess with how jQuery Mobile works
+*/
+
+(function(window, $, PhotoSwipe){
+	$(document).ready(function(){
+		$('div.gallery-page').live('pageshow', function(e){
+			alert(e);
+			var 
+			currentPage = $(e.target),
+			options = {},
+			photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
+
+			return true;
+		})
+		.live('pagehide', function(e){
 			
-			}); //end getJSON() 
-			
-			
-			//var myPhotoSwipe = $("#Gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
-			
-		});	//end ready
-	</script>
-	
-	
-	
-	
-	
-	
-	<script type="text/javascript">
+			var 
+			currentPage = $(e.target),
+			photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+			if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+				PhotoSwipe.detatch(photoSwipeInstance);
+			}
+			return true;
+		});
+	});
+}(window, window.jQuery, window.Code.PhotoSwipe));
 
-			/*
-			 * IMPORTANT!!!
-			 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
-			 * If you don't this will mess with how jQuery Mobile works
-			 */
 
-			(function(window, $, PhotoSwipe){
 
-				$(document).ready(function(){
+/*
+*	LOCATION
+*/
 
-					$('div.gallery-page')
-						.live('pageshow', function(e){
+$('#loc').live('pageinit',function(event){
+	SetCurrentLocation();
+});
 
-							var 
-								currentPage = $(e.target),
-								options = {},
-								photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
 
-							return true;
+</script>
 
-						})
 
-						.live('pagehide', function(e){
 
-							var 
-								currentPage = $(e.target),
-								photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+</head>
 
-							if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
-								PhotoSwipe.detatch(photoSwipeInstance);
-							}
-
-							return true;
-
-						});
-
-				});
-
-			}(window, window.jQuery, window.Code.PhotoSwipe));
-
-		</script>
-	
-	
-	
-	
-	
-	
-	
-	
-  </head>
-
-	<body>
-
+<body>
 
 <!-- PAGE HOME -->
-	<div data-role="page" id="Home">
-
-		<div data-role="header">
-			<h1>PhotoSwipe demo</h1>
-		</div>
-		
-		<div data-role="content" >	
-			<ul data-role="listview" data-inset="true">
-				<li><a href="#Gallery1">Demo Galleri</a></li> 
-				<li><a href="#Search">Search</a></li> 
-				
-			</ul> 
-		</div>
-		<div data-role="footer">
-			<h4>Demo Galleri</h4>
-		</div>
+<div data-role="page" id="Home">
+	<div data-role="header">
+		<h1>PhotoSwipe demo</h1>
 	</div>
+
+	<div data-role="content" >	
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#Gallery1">Demo Galleri</a></li> 
+			<li><a href="search.html">Search</a></li> 
+			<li><a href="#loc">Location</a></li>
+		</ul> 
+	</div>
+
+	<div data-role="footer">
+		<h4>Demo Galleri</h4>
+	</div>
+</div>
 
 
 <!-- PAGE GALLERI -->
-	<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
-
-		<div data-role="header">
-			<h1>Demo Galleri</h1>
-		</div>
-
-		<div data-role="content">	
-
-			<ul class="gallery">
-
-				<!-- Images added via jquery -->
-
-			</ul>
-
-		</div>
-
-		<div data-role="footer">
-			<h4> Demo Galleri</h4>
-		</div>
-
+<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
+	<div data-role="header">
+		<h1>Demo Galleri</h1>
 	</div>
-	
-<!-- PAGE SEARCH -->
-	<div data-role="page" data-add-back-btn="true" id="Search">
-		<div data-role="header">
-			<h1>Search</h1>
-			<form action="" method="get" class="ui-body ui-body-a ui-corner-all">
-				<div data-role="fieldcontain">
-					<label for="query">Search: </label>
-					<input type="search" name="query" id="name" value="" />
-					<button type="submit" name="submit">Submit</input>
-				</div>
-			</form>
-			<div id="Result">
-			</div>
-		</div>
+	<div data-role="content">	
+		<ul class="gallery">
+
+<!-- Images added via jquery -->
+
+		</ul>
 	</div>
-	
-	<script type="text/javascript">
-		$("form").submit(function(){
-			var q = $("query").textinput();
-			alert( "query:" + q);
-		});
-	</script>
-	
-	
-	</body>
+
+
+	<div data-role="footer">
+		<h4> Demo Galleri</h4>
+	</div>
+</div>
+
+
+<!-- PAGE LOCATION -->
+<div data-role="page" data-add-back-btn="true" id="loc" class="location-page">
+	<div data-role="header">
+		<h1>Location</h1>
+	</div>
+	<div data-role="content">
+	</div>
+</body>
 
 </html>

@@ -11,34 +11,67 @@
 	<link href="http://www.photoswipe.com/latest/photoswipe.css" type="text/css" rel="stylesheet" />
 
 
+
+
+	<script type="text/javascript">
+
+		$("#Search-page").live("pageinit",function(event){
+		
+			$("form").submit(function(){
+			var q = $("#search").val();
+			var service_uri = 'http://barnehage.vps4.front.no/api/rest/search_node/retrieve.json';
+			var request = $.ajax({
+				type:"GET",
+				url: service_uri,
+				data:"keys=" + q,
+				dataType: "json"
+				});
+				
+				
+			// SUCCESS
+			request.done(function(msg){
+				console.log(msg);
+				$.each(msg,function(){ 
+					$("div#Result ul").append("<li class='ui-li ui-li-static ui-body-c'><p class='ui-li-aside'>" + this.type + "</p><a href='" + this.link + "'><h3>" + this.title + "</h3></a><p>" + this.snippet + "</p></li>");	
+					});
+				});
+				
+			// FAILURE
+			request.fail(function(jqXHR, textStatus){
+				alert("Search failed: " + textStatus);
+				});
+		
+			
+			
+			
+			return false;
+			});
+		
+		});
+	</script>
+
+
+
 </head>
 <body>
-
-	<div data-role="page" data-add-back-btn="true" id="Search">
+	<div data-role="page" data-add-back-btn="true" id="Search-page">
 		<div data-role="header">
 			<h1>Search</h1>
 			<form action="" method="get" class="ui-body ui-body-a ui-corner-all">
 				<div data-role="fieldcontain">
-					<label for="query">Search: </label>
 					<input type="search" name="search" id="search" value="" />
-					<button type="submit" name="submit">Submit</input>
-					</div>
-				</form>
-				<div id="Result">
+					<button type="submit" name="submit">Search</input>
 				</div>
+			</form>
+		</div>
+		<div data-role="content">
+			<div id="Result">
+				<ul data-role="listview" data-theme="c">
+					<!-- Results build with jquery -->
+				</ul>
 			</div>
 		</div>
-
-		<script type="text/javascript">
-		$("form").submit(function(){
-			var q = $("#search").val();
-			//alert( "query:" + q);
-			return false;
-		});
-		</script>
-
-	</div>
-
+	</div> 
 </body>
 
 </html>
