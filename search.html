@@ -19,15 +19,16 @@
 		
 			$("form").submit(function(){
 			var q = $("#search").val();
-			var service_uri = 'http://barnehage.vps4.front.no/api/rest/search_node/retrieve.json';
+			var SERVICE_URI = 'http://barnehage.vps4.front.no/api/rest/search_node/retrieve.json';
+			
+			
 			var request = $.ajax({
 				type:"GET",
-				url: service_uri,
+				url: SERVICE_URI,
 				data:"keys=" + q,
 				dataType: "json"
 				});
-				
-				
+						
 			// SUCCESS
 			request.done(function(msg){
 				console.log(msg);
@@ -40,10 +41,6 @@
 			request.fail(function(jqXHR, textStatus){
 				alert("Search failed: " + textStatus);
 				});
-		
-			
-			
-			
 			return false;
 			});
 		

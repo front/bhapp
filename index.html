@@ -26,7 +26,6 @@
 $('#Gallery1').live( 'pageinit', function(event){
 	var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
 	var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
-	
 	getImages( GALLERY_URI,SERVICE_URI);
 	
 });
@@ -75,6 +74,15 @@ $('#loc').live('pageinit',function(event){
 });
 
 
+$("#Calendar-page").live("pageinit", function(event){
+	//alert("here");
+	$("#calendar").fullCalendar({
+		weekends:false
+		
+	});
+});
+
+
 </script>
 
 
@@ -94,6 +102,7 @@ $('#loc').live('pageinit',function(event){
 			<li><a href="#Gallery1">Bildegalleri</a></li> 
 			<li><a href="search.html">Search</a></li> 
 			<li><a href="#loc">Location</a></li>
+			<li><a href="#Calendar-page">Calendar</a></li>
 		</ul> 
 	</div>
 
@@ -110,13 +119,9 @@ $('#loc').live('pageinit',function(event){
 	</div>
 	<div data-role="content">	
 		<ul class="gallery">
-
-<!-- Images added via jquery -->
-
+		<!-- Images added via jquery -->
 		</ul>
 	</div>
-
-
 	<div data-role="footer">
 		<h4> Demo Galleri</h4>
 	</div>
@@ -130,6 +135,20 @@ $('#loc').live('pageinit',function(event){
 	</div>
 	<div data-role="content">
 	</div>
+</div>
+
+
+<div data-role="page" data-add-back-btn="true" id="Calendar-page">
+	<div data-role="header">
+		<h1>Calendar</h1>	
+	</div>
+	<div data-role="content">
+		<div id="calendar">
+		</div>
+	</div>	
+</div>
+
+
 </body>
 
 </html>
