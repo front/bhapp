@@ -24,10 +24,7 @@
  */
 
 $('#Gallery1').live( 'pageinit', function(event){
-	var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
-	var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
-	getImages( GALLERY_URI,SERVICE_URI);
-	
+	ShowGallery();
 });
 
 
@@ -76,10 +73,8 @@ $('#loc').live('pageinit',function(event){
 
 $("#Calendar-page").live("pageinit", function(event){
 	//alert("here");
-	$("#calendar").fullCalendar({
-		weekends:false
-		
-	});
+	CreateCalendar();
+
 });
 
 

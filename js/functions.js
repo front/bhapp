@@ -3,6 +3,10 @@ var THORANDRE_LON = 10.9481590;
 var FRANK_LAT = 59.2163787;
 var FRANK_LON = 10.9524835;
 
+var IMPORTANT_DATES_JSON_FEED = "http://localhost/barnehage/api/rest/important_dates/retrieve.json?keys=temp";
+var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
+var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
+
 function SetCurrentLocation(){ navigator.geolocation.getCurrentPosition(SetCurrentLocation_OnSuccess, SetCurrentLocation_OnError,{maximumAge:0, timeout:15000}); }
 
 function SetCurrentLocation_OnSuccess(position) {
@@ -53,7 +57,7 @@ function SetCurrentLocation_OnError(error) {
 		alert("Location not found");
 }
 
-function getImages( GALLERY_URI, SERVICE_URI){
+function ShowGallery(){
 
   $.getJSON(SERVICE_URI, function(data){
 
@@ -132,3 +136,12 @@ function CalculateAirDistance(lat1, lon1, lat2, lon2) {
     var d = R * c;
     return d;
 }
+
+
+function CreateCalendar(){
+  $("#calendar").fullCalendar({
+	  weekends:false,
+	  events: IMPORTANT_DATES_JSON_FEED
+  });
+}
+
