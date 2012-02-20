@@ -1,12 +1,11 @@
 var THORANDRE_LAT = 59.22370640;
 var THORANDRE_LON = 10.9481590;
+var FRANK_LAT = 59.2163787;
+var FRANK_LON = 10.9524835;
 
 function SetCurrentLocation(){ navigator.geolocation.getCurrentPosition(SetCurrentLocation_OnSuccess, SetCurrentLocation_OnError,{maximumAge:0, timeout:15000}); }
 
 function SetCurrentLocation_OnSuccess(position) {
-	//sLatitude = position.coords.latitude;
-	//sLongitude = position.coords.longitude;
-	
 	
 	//Build the DOM
 	$('div#loc div.ui-content').append("<div id='mapcanvas' style='height:400px' style='width:100%'></div");
@@ -32,7 +31,6 @@ function SetCurrentLocation_OnSuccess(position) {
 	  map: map, 
 	  title:"Du er her! (Med " + position.coords.accuracy + " meters nøyaktighet)"
 	  });
-	  
   var marker = new google.maps.Marker({
 	  position: ThorAndrePosition, 
 	  map: map, 
@@ -45,7 +43,10 @@ function SetCurrentLocation_OnSuccess(position) {
 	$('ul#mapinfo').listview("refresh");
   
   // Call asynchmethod SetDriveDistance to calculate driving distance and then add it to the DOM
-	SetTravelDistance(position.coords.latitude, position.coords.longitude, THORANDRE_LAT, THORANDRE_LON);		
+	SetTravelDistance(position.coords.latitude, position.coords.longitude, THORANDRE_LAT, THORANDRE_LON, "driving");
+	SetTravelDistance(position.coords.latitude, position.coords.longitude, THORANDRE_LAT, THORANDRE_LON, "walking");		
+	SetTravelDistance(position.coords.latitude, position.coords.longitude, THORANDRE_LAT, THORANDRE_LON, "bicycling");		
+			
 }
 
 function SetCurrentLocation_OnError(error) {
@@ -66,11 +67,12 @@ function getImages( GALLERY_URI, SERVICE_URI){
   }); 
 }
 
-function SetTravelDistance(lat1,lon1,lat2,lon2){
+function SetTravelDistance(lat1,lon1,lat2,lon2, mode){
   
   var url = "http://maps.googleapis.com/maps/api/directions/json";
   var data =  "origin=" + lat1 + "," + lon1 + 
               "&destination=" + lat2 + "," + lon2 + 
+              "&mode=" + mode + 
               "&sensor=false";
   
 	var request = $.ajax({
@@ -84,10 +86,25 @@ function SetTravelDistance(lat1,lon1,lat2,lon2){
 	request.success( function( response ){
 	  
 	  // Get the distance from the object
+	  try{
 	  distance =  response.routes[0].legs[0].distance.value;
-	  
+    }catch(e){}
 	  // Add the distance to the DOM
-	  $('ul#mapinfo').append("<li>Du er " + distance/1000 + " km fra huset til Thor Andre med bil</li>");
+	  var transport_method;
+	  switch(mode){
+	    case "driving":
+	      transport_method = "med bil";
+	      break;
+	    case "walking":
+	      transport_method = "til fots";
+	      break;
+	    case "bicycling":
+	      transport_method = "med sykkel";
+	      break;
+	      
+	  }
+	  
+	  $('ul#mapinfo').append("<li>Du er " + distance/1000 + " km fra huset til Thor Andre " + transport_method + "</li>");
 	  $('ul#mapinfo').listview("refresh");
 	  });
 		
