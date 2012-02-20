@@ -28,37 +28,9 @@ $('#Gallery1').live( 'pageinit', function(event){
 });
 
 
-
-/*
-* IMPORTANT!!!
-* REMEMBER TO ADD  rel="external"  to your anchor tags. 
-* If you don't this will mess with how jQuery Mobile works
-*/
-
-
-(function(window, $, PhotoSwipe){
-	$(document).ready(function(){
-		$('div.gallery-page').live('pageshow', function(e){
-			//alert(e);
-			var 
-			currentPage = $(e.target),
-			options = {},
-			photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
-
-			return true;
-		})
-		.live('pagehide', function(e){
-			
-			var 
-			currentPage = $(e.target),
-			photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
-			if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
-				PhotoSwipe.detatch(photoSwipeInstance);
-			}
-			return true;
-		});
-	});
-}(window, window.jQuery, window.Code.PhotoSwipe));
+$("#Search-page").live("pageinit",function(event){
+	ShowSearch();
+});
 
 
 
@@ -95,7 +67,7 @@ $("#Calendar-page").live("pageinit", function(event){
 	<div data-role="content" >	
 		<ul data-role="listview" data-inset="true">
 			<li><a href="#Gallery1">Bildegalleri</a></li> 
-			<li><a href="search.html">Search</a></li> 
+			<li><a href="#Search-page">Search</a></li> 
 			<li><a href="#loc">Location</a></li>
 			<li><a href="#Calendar-page">Calendar</a></li>
 		</ul> 
@@ -123,6 +95,27 @@ $("#Calendar-page").live("pageinit", function(event){
 </div>
 
 
+<!-- PAGE SEARCH -->
+<div data-role="page" data-add-back-btn="true" id="Search-page">
+	<div data-role="header">
+		<h1>Search</h1>
+		<form action="" method="get" class="ui-body ui-body-a ui-corner-all">
+			<div data-role="fieldcontain">
+				<input type="search" name="search" id="search" value="" />
+				<button type="submit" name="search-submit">Search</input>
+			</div>
+		</form>
+	</div>
+	<div data-role="content">
+		<div id="Result">
+			<ul data-role="listview" data-theme="c">
+				<!-- Results build with jquery -->
+			</ul>
+		</div>
+	</div>
+</div>
+
+
 <!-- PAGE LOCATION -->
 <div data-role="page" data-add-back-btn="true" id="loc" class="location-page">
 	<div data-role="header">
@@ -142,6 +135,9 @@ $("#Calendar-page").live("pageinit", function(event){
 		</div>
 	</div>	
 </div>
+
+
+
 
 
 </body>

@@ -6,6 +6,8 @@ var FRANK_LON = 10.9524835;
 var IMPORTANT_DATES_JSON_FEED = "http://localhost/barnehage/api/rest/important_dates/retrieve.json?keys=temp";
 var GALLERY_URI = "http://barnehage.vps4.front.no/sites/default/files/gallery/";
 var SERVICE_URI = "http://barnehage.vps4.front.no/api/datasource/";
+var SEARCH_URI = 'http://barnehage.vps4.front.no/api/rest/search_node/retrieve.json';
+
 
 function SetCurrentLocation(){ navigator.geolocation.getCurrentPosition(SetCurrentLocation_OnSuccess, SetCurrentLocation_OnError,{maximumAge:0, timeout:15000}); }
 
@@ -69,6 +71,28 @@ function ShowGallery(){
 		  $("#Gallery1 .gallery").append( new_img);					
     }); 
   }); 
+  
+  (function(window, $, PhotoSwipe){
+  	$('div.gallery-page').on('pageshow', function(e){
+  	  console.log("e.target:");
+  		console.log(e.target);
+  		var photoSwipeInstance = $("ul.gallery a").photoSwipe( { jQueryMobile: true } );
+  		
+  		console.log(photoSwipeInstance);
+			return true;
+  		});
+  		
+  		$('div.gallery-page').on('pagehide', function(e){
+  			var 
+  			currentPage = $(e.target),
+  			photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+  			if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+  				PhotoSwipe.detatch(photoSwipeInstance);
+  			}
+  			return true;
+  	});
+  }(window, window.jQuery, window.Code.PhotoSwipe));
+  
 }
 
 function SetTravelDistance(lat1,lon1,lat2,lon2, mode){
@@ -137,7 +161,6 @@ function CalculateAirDistance(lat1, lon1, lat2, lon2) {
     return d;
 }
 
-
 function CreateCalendar(){
   $("#calendar").fullCalendar({
 	  weekends:false,
@@ -145,3 +168,29 @@ function CreateCalendar(){
   });
 }
 
+function ShowSearch(){
+	$("form").submit(function(){
+	  var q = $("#search").val();
+		var request = $.ajax({
+		  type:"GET",
+		  url: SEARCH_URI,
+		  data:"keys=" + q,
+		  dataType: "json"
+		  });
+				
+	// SUCCESS
+	  request.done(function( msg ){
+		  $.each(msg,function(){ 
+			  $("div#Result ul").append( "<li class='ui-li ui-li-static ui-body-c'><p class='ui-li-aside'>" + this.type + "</p><a href='" + this.link + "'><h3>" + this.title + "</h3></a><p>" + this.snippet + "</p></li>");	
+			  });
+		  });
+		
+	// FAILURE
+	request.fail(function(jqXHR, textStatus){
+		alert("Search failed: " + textStatus);
+	  });
+	  
+	  // Return false to avoid standard submit funcionality
+	return false;
+	});
+}
