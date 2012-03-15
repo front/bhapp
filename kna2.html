@@ -35,38 +35,41 @@
 
 <body>
 	<div data-role="page" data-add-back-btn="true" id="kna">
+
 		<div data-role="header">
 			<h1>KNA</h1>	
 		</div>
 		<div data-role="content">
 
-			<form action="kna2.html" title= 'next' rel= 'external' text='Go to Google!'>
-				<!-- label for="basic">Text Input:</label><input type="text" name="name" id="basic" / -->
-				<a href="kna.html" data-role="button" data-icon="gear">Ta bilde</a>
-				<div data-role="collapsible">
-					<h3>Beskrivelse av trafikkfelle</h3>
-					<div data-role="fieldcontain">
-						<!--label for="textarea">Textarea:</label -->
-						<textarea cols="40" rows="8" name="textarea" id="description"></textarea>
-					</div>
-				</div>
-				<div data-role="collapsible">
-					<h3>Kjennskap til ulykker p&aring; stedet</h3>
-					<div data-role="fieldcontain">
-						<!--label for="textarea">Textarea:</label -->
-						<textarea cols="40" rows="8" name="textarea" id="knowledge"></textarea>
-					</div>
-				</div>					
-				<div data-role="collapsible">
-					<h3>Hva b&oslash;r gj&oslash;res for &aring; fjerne trafikkfellen?</h3>
-					<div data-role="fieldcontain">
-						<!--label for="textarea">Textarea:</label -->
-						<textarea cols="40" rows="8" name="textarea" id="whataction"></textarea>
-					</div>
-				</div>
-				<input type="submit" value="Neste" />
+			<form action="kna3.html" title= 'next' rel= 'external' text='Go to Google!'>
+				<a href="kna.html" data-role="button" data-icon="gear">Finn stedsinformasjon med GPS</a>
 
-			</form>
+				<label for="select-choice-0" class="select">Veitype:</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="riksvei">Riksvei</option>
+					<option value="fylkesvei">Fylkesvei</option>
+					<option value="kommunalvei">Kommunal vei</option>
+					<option value="privatveir">Privat vei</option>
+				</select>
+
+
+				<label for="select-choice-0" class="select">Fylke:</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="ostfold">&Oslash;stfold</option>
+					<option value="vestfold">Vestfold</option>
+					<option value="resten">Resten av landet</option>
+				</select>
+
+				<label for="sted">Sted</label>
+				<input type="text" name="sted" id="sted" / >
+
+				<label for="vei">Vei</label>
+				<input type="text" name="vei" id="vei" / >
+
+
+								<input type="submit" value="Neste" />
+
+			</div>
 		</div>
 	</div>
 
