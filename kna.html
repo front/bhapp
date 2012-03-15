@@ -37,9 +37,9 @@
 		</div>
 		<div data-role="content">
 
-			<form href: 'http://google.com'	title= 'next' rel= 'external' text='Go to Google!'>
+			<form 	title= 'next' rel= 'external' text='Go to Google!'>
 				<!-- label for="basic">Text Input:</label><input type="text" name="name" id="basic" / -->
-				<a href="index.html" data-role="button" data-icon="gear">Ta bilde</a>
+				<a href="kna.html" data-role="button" data-icon="gear">Ta bilde</a>
 				<div data-role="collapsible">
 					<h3>Beskrivelse av trafikkfelle</h3>
 					<div data-role="fieldcontain">
@@ -61,26 +61,88 @@
 						<textarea cols="40" rows="8" name="textarea" id="whataction"></textarea>
 					</div>
 				</div>
-								<a href="index.html" data-role="button" data-icon="gear">Finn stedsinformasjon</a>
+
+
+				<!-- SIDE 2 -->
+
+
+
+				<a href="kna.html" data-role="button" data-icon="gear">Finn stedsinformasjon med GPS</a>
+
+				<label for="select-choice-0" class="select">Veitype:</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="riksvei">Riksvei</option>
+					<option value="fylkesvei">Fylkesvei</option>
+					<option value="kommunalvei">Kommunal vei</option>
+					<option value="privatveir">Privat vei</option>
+				</select>
+
+
+				<label for="select-choice-0" class="select">Fylke:</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="ostfold">&Oslash;stfold</option>
+					<option value="vestfold">Vestfold</option>
+					<option value="resten">Resten av landet</option>
+				</select>
+
+				<label for="sted">Sted</label>
+				<input type="text" name="sted" id="sted" / >
+
+				<label for="vei">Vei</label>
+				<input type="text" name="vei" id="vei" / >
 
 
 
 
+				<!-- SIDE 3 -->
+				<div id="stateDiv" data-role="fieldcontain">  
+
+					<label for="sted">Navn</label>
+					<input type="text" name="sted" id="sted" / >
+					<label for="sted">Adresse</label>
+					<input type="text" name="sted" id="sted" / >
+					<div id="postinfo" data-role="fieldcontain" data-inline="true">  
+
+						<label for="postnr">Postnr</label>
+						<input type="text" name="sted" id="postnr" / >
+						<label for="poststed">poststed</label>
+						<input type="text" name="sted" id="poststed" / >
+
+
+					</div>
+
+					<label for="sted">Epost</label>
+					<input type="text" name="sted" id="sted" / >
+					<label for="sted">Telefon</label>
+					<input type="text" name="sted" id="sted" / >
+				</div>
+
+
+
+				<fieldset data-role="controlgroup">
+					<!-- legend>Jeg samtykker i at KNA kan bruke denne informasjonen i mediesammenheng</legend -->
+					<input type="checkbox" name="mediaok" id="mediaok" class="custom" />
+					<label for="mediaok">Jeg samtykker i at KNA kan bruke denne informasjonen i mediesammenheng</label>
+				</fieldset>
+				<fieldset data-role="controlgroup">
+					<!-- legend>Jeg samtykker i at KNA kan bruke denne informasjonen i mediesammenheng</legend -->
+					<input type="checkbox" name="ismember" id="ismember" class="custom" />
+					<label for="ismember">Jeg er medlem av KNA</label>
+				</fieldset>			
+					<fieldset data-role="controlgroup">
+					<!-- legend>Jeg samtykker i at KNA kan bruke denne informasjonen i mediesammenheng</legend -->
+					<input type="checkbox" name="onskermedlemskap" id="onskermedlemskap" class="custom" />
+					<label for="onskermedlemskap">Jeg &oslash;nsker &aring; motta tilbud om medlemskap i KNA</label>
+				</fieldset>
 
 
 			</form>
+
+
+
+
 		</div>
 	</div>	
 </div>
-
-
-
-
-
-
-
-
-
 </body>
-
 </html>
