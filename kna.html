@@ -16,8 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.0.1/jquery.mobile-1.0.1.css"  />
 	<link rel="stylesheet" type="text/css" href="css/photoswipe-jquery-mobile.css"   />
 	<link rel="stylesheet" type="text/css" href="css/photoswipe.css"  />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<script type="text/javascript">
 
-	<script type="text/javascript">
+
 
 /* 
  * GALLERY 
@@ -61,12 +64,22 @@
 						<textarea cols="40" rows="8" name="textarea" id="whataction"></textarea>
 					</div>
 				</div>
+				<input type="submit" value="Neste" />
 
+			</form>
+		</div>
+	</div>
 
-				<!-- SIDE 2 -->
+	<!-- SIDE 2 -->
 
+	<div data-role="page" data-add-back-btn="true" id="kna">
 
+		<div data-role="header">
+			<h1>KNA</h1>	
+		</div>
+		<div data-role="content">
 
+			<form 	title= 'next' rel= 'external' text='Go to Google!'>
 				<a href="kna.html" data-role="button" data-icon="gear">Finn stedsinformasjon med GPS</a>
 
 				<label for="select-choice-0" class="select">Veitype:</label>
@@ -90,10 +103,19 @@
 
 				<label for="vei">Vei</label>
 				<input type="text" name="vei" id="vei" / >
+			</div>
+		</div>
+	</div>
 
 
+	<div data-role="page" data-add-back-btn="true" id="kna">
 
+		<div data-role="header">
+			<h1>KNA</h1>	
+		</div>
+		<div data-role="content">
 
+			<form 	title= 'next' rel= 'external' text='Go to Google!'>
 				<!-- SIDE 3 -->
 				<div id="stateDiv" data-role="fieldcontain">  
 
@@ -129,20 +151,13 @@
 					<input type="checkbox" name="ismember" id="ismember" class="custom" />
 					<label for="ismember">Jeg er medlem av KNA</label>
 				</fieldset>			
-					<fieldset data-role="controlgroup">
+				<fieldset data-role="controlgroup">
 					<!-- legend>Jeg samtykker i at KNA kan bruke denne informasjonen i mediesammenheng</legend -->
 					<input type="checkbox" name="onskermedlemskap" id="onskermedlemskap" class="custom" />
 					<label for="onskermedlemskap">Jeg &oslash;nsker &aring; motta tilbud om medlemskap i KNA</label>
 				</fieldset>
-
-
 			</form>
-
-
-
-
 		</div>
-	</div>	
-</div>
+	</div>
 </body>
 </html>
