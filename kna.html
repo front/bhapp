@@ -23,26 +23,7 @@
  * GALLERY 
  */
 
- $('#Gallery-Page').live( 'pageinit', function(event){
- 	ShowGallery();
- });
-
- $("#Search-Page").live("pageinit",function(event){
- 	ShowSearch();
- });
-
- $('#Location-Page').live('pageinit',function(event){
- 	SetCurrentLocation();
- });
-
-
- $("#Calendar-Page").live("pageinit", function(event){
- 	CreateCalendar();
- });
- $("#kna").live("pageinit", function(event){
- 	showkna();
- });
-
+ 
  </script>
 
 
@@ -50,129 +31,56 @@
 </head>
 
 <body>
-
-	<!-- PAGE HOME -->
-	<div data-role="page" id="Home-Page">
+	<div data-role="page" data-add-back-btn="true" id="kna">
 		<div data-role="header">
-			<h1>Frontkom mobil</h1>
+			<h1>KNA</h1>	
 		</div>
+		<div data-role="content">
 
-		<div data-role="content" >	
-			<ul data-role="listview" data-inset="true">
-				<li><a href="#Gallery-Page">Bildegalleri</a></li> 
-				<li><a href="#Search-Page">Search</a></li> 
-				<li><a href="#Location-Page">Location</a></li>
-				<li><a href="#Calendar-Page">Calendar</a></li>
-				<li><a href="#kna">kna</a></li>
-
-			</ul> 
-		</div>
-
-		<div data-role="footer">
-			<h4></h4>
-		</div>
-	</div>
-
-
-	<!-- PAGE GALLERI -->
-	<div data-role="page" data-add-back-btn="true" id="Gallery-Page" class="gallery-page">
-		<div data-role="header">
-			<h1>Demo Galleri</h1>
-		</div>
-		<div data-role="content">	
-			<ul class="gallery">
-				<!-- Images added via jquery -->
-			</ul>
-		</div>
-		<div data-role="footer">
-			<h4> Demo Galleri</h4>
-		</div>
-	</div>
-
-
-	<!-- PAGE SEARCH -->
-	<div data-role="page" data-add-back-btn="true" id="Search-Page">
-		<div data-role="header">
-			<h1>Search</h1>
-			<form action="" method="get" class="ui-body ui-body-a ui-corner-all">
-				<div data-role="fieldcontain">
-					<input type="search" name="search" id="search" value="" />
-					<button type="submit" name="search-submit">Search</input>
+			<form href: 'http://google.com'	title= 'next' rel= 'external' text='Go to Google!'>
+				<!-- label for="basic">Text Input:</label><input type="text" name="name" id="basic" / -->
+				<a href="index.html" data-role="button" data-icon="gear">Ta bilde</a>
+				<div data-role="collapsible">
+					<h3>Beskrivelse av trafikkfelle</h3>
+					<div data-role="fieldcontain">
+						<!--label for="textarea">Textarea:</label -->
+						<textarea cols="40" rows="8" name="textarea" id="description"></textarea>
 					</div>
-				</form>
-			</div>
-			<div data-role="content">
-				<div id="Result">
-					<ul data-role="listview" data-theme="c">
-						<!-- Results build with jquery -->
-					</ul>
 				</div>
-			</div>
-		</div>
-
-
-		<!-- PAGE LOCATION -->
-		<div data-role="page" data-add-back-btn="true" id="Location-Page">
-			<div data-role="header">
-				<h1>Location</h1>
-			</div>
-			<div data-role="content">
-			</div>
-		</div>
-
-
-		<div data-role="page" data-add-back-btn="true" id="Calendar-Page">
-			<div data-role="header">
-				<h1>Calendar</h1>	
-			</div>
-			<div data-role="content">
-				<div id="calendar">
-				</div>
-			</div>	
-		</div>
-
-		<div data-role="page" data-add-back-btn="true" id="kna">
-			<div data-role="header">
-				<h1>KNA</h1>	
-			</div>
-			<div data-role="content">
-
-				<form href: 'http://google.com'	title= 'next' rel= 'external' text='Go to Google!'>
-					<!-- label for="basic">Text Input:</label><input type="text" name="name" id="basic" / -->
-					<a href="index.html" data-role="button" data-icon="gear">Ta bilde</a>
-					<div data-role="collapsible">
-						<h3>Beskrivelse av trafikkfelle</h3>
-						<div data-role="fieldcontain">
-							<!--label for="textarea">Textarea:</label -->
-							<textarea cols="40" rows="8" name="textarea" id="description"></textarea>
-						</div>
+				<div data-role="collapsible">
+					<h3>Kjennskap til ulykker p&aring; stedet</h3>
+					<div data-role="fieldcontain">
+						<!--label for="textarea">Textarea:</label -->
+						<textarea cols="40" rows="8" name="textarea" id="knowledge"></textarea>
 					</div>
-					<div data-role="collapsible">
-						<h3>Kjennskap til ulykker p&aring; stedet</h3>
-						<div data-role="fieldcontain">
-							<!--label for="textarea">Textarea:</label -->
-							<textarea cols="40" rows="8" name="textarea" id="knowledge"></textarea>
-						</div>
-					</div>					
-					<div data-role="collapsible">
-						<h3>Hva b&oslash;r gj&oslash;res for &aring; fjerne trafikkfellen?</h3>
-						<div data-role="fieldcontain">
-							<!--label for="textarea">Textarea:</label -->
-							<textarea cols="40" rows="8" name="textarea" id="whataction"></textarea>
-						</div>
+				</div>					
+				<div data-role="collapsible">
+					<h3>Hva b&oslash;r gj&oslash;res for &aring; fjerne trafikkfellen?</h3>
+					<div data-role="fieldcontain">
+						<!--label for="textarea">Textarea:</label -->
+						<textarea cols="40" rows="8" name="textarea" id="whataction"></textarea>
 					</div>
-
-				</form>
-
-
-
-				<div id="knacontent">
 				</div>
-			</div>	
+								<a href="index.html" data-role="button" data-icon="gear">Finn stedsinformasjon</a>
+
+
+
+
+
+
+			</form>
 		</div>
+	</div>	
+</div>
 
 
 
-	</body>
 
-	</html>
+
+
+
+
+
+</body>
+
+</html>
