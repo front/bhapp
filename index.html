@@ -1,7 +1,7 @@
 <html>
 <head>
 	<script type="text/javascript" src="js/jquery.js"></script>	
-	<script type="text/javascript" src="js/jquery.mobile-1.0.1.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.0.1/jquery.mobile-1.0.1.js"></script>
 	
 	<script type="text/javascript" src="photoswipe/lib/klass.min.js"></script>
 	<script type="text/javascript" src="photoswipe/code.photoswipe-3.0.4.min.js"></script>
@@ -13,9 +13,9 @@
 	
 	
 	<link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css"  />
-	<link rel="stylesheet" type="text/css" href="http://www.photoswipe.com/latest/examples/jquery-mobile.css"   />
-	<link rel="stylesheet" type="text/css" href="http://www.photoswipe.com/latest/photoswipe.css"  />
+	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.0.1/jquery.mobile-1.0.1.css"  />
+	<link rel="stylesheet" type="text/css" href="css/photoswipe-jquery-mobile.css"   />
+	<link rel="stylesheet" type="text/css" href="css/photoswipe.css"  />
 
 <script type="text/javascript">
 
@@ -23,30 +23,21 @@
  * GALLERY 
  */
 
-$('#Gallery1').live( 'pageinit', function(event){
+$('#Gallery-Page').live( 'pageinit', function(event){
 	ShowGallery();
 });
 
-
-$("#Search-page").live("pageinit",function(event){
+$("#Search-Page").live("pageinit",function(event){
 	ShowSearch();
 });
 
-
-
-/*
-*	LOCATION
-*/
-
-$('#loc').live('pageinit',function(event){
+$('#Location-Page').live('pageinit',function(event){
 	SetCurrentLocation();
 });
 
 
-$("#Calendar-page").live("pageinit", function(event){
-	//alert("here");
+$("#Calendar-Page").live("pageinit", function(event){
 	CreateCalendar();
-
 });
 
 
@@ -59,17 +50,17 @@ $("#Calendar-page").live("pageinit", function(event){
 <body>
 
 <!-- PAGE HOME -->
-<div data-role="page" id="Home">
+<div data-role="page" id="Home-Page">
 	<div data-role="header">
 		<h1>Frontkom mobil</h1>
 	</div>
 
 	<div data-role="content" >	
 		<ul data-role="listview" data-inset="true">
-			<li><a href="#Gallery1">Bildegalleri</a></li> 
-			<li><a href="#Search-page">Search</a></li> 
-			<li><a href="#loc">Location</a></li>
-			<li><a href="#Calendar-page">Calendar</a></li>
+			<li><a href="#Gallery-Page">Bildegalleri</a></li> 
+			<li><a href="#Search-Page">Search</a></li> 
+			<li><a href="#Location-Page">Location</a></li>
+			<li><a href="#Calendar-Page">Calendar</a></li>
 		</ul> 
 	</div>
 
@@ -80,7 +71,7 @@ $("#Calendar-page").live("pageinit", function(event){
 
 
 <!-- PAGE GALLERI -->
-<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
+<div data-role="page" data-add-back-btn="true" id="Gallery-Page" class="gallery-page">
 	<div data-role="header">
 		<h1>Demo Galleri</h1>
 	</div>
@@ -96,7 +87,7 @@ $("#Calendar-page").live("pageinit", function(event){
 
 
 <!-- PAGE SEARCH -->
-<div data-role="page" data-add-back-btn="true" id="Search-page">
+<div data-role="page" data-add-back-btn="true" id="Search-Page">
 	<div data-role="header">
 		<h1>Search</h1>
 		<form action="" method="get" class="ui-body ui-body-a ui-corner-all">
@@ -117,7 +108,7 @@ $("#Calendar-page").live("pageinit", function(event){
 
 
 <!-- PAGE LOCATION -->
-<div data-role="page" data-add-back-btn="true" id="loc" class="location-page">
+<div data-role="page" data-add-back-btn="true" id="Location-Page">
 	<div data-role="header">
 		<h1>Location</h1>
 	</div>
@@ -126,7 +117,7 @@ $("#Calendar-page").live("pageinit", function(event){
 </div>
 
 
-<div data-role="page" data-add-back-btn="true" id="Calendar-page">
+<div data-role="page" data-add-back-btn="true" id="Calendar-Page">
 	<div data-role="header">
 		<h1>Calendar</h1>	
 	</div>
